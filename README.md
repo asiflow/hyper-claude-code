@@ -2,89 +2,94 @@
 
 <h1>Hyper Claude Code</h1>
 
-<h3>The intelligent middleware platform for Claude Code</h3>
+**The intelligent middleware platform for Claude Code.**
 
-<p>Run Claude Code with any model. Track costs. Cache responses. Auto-failover between providers.<br>Ship with a 31-agent AI development team built in.</p>
+Use any model. Track costs. Cache responses. Auto-failover between providers.
+Ships with a 31-agent AI engineering team as a built-in operating system layer.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Python 3.14](https://img.shields.io/badge/python-3.14-3776ab.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/downloads/)
-[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json&style=for-the-badge)](https://github.com/astral-sh/uv)
-[![Tested with Pytest](https://img.shields.io/badge/testing-Pytest-00c0ff.svg?style=for-the-badge)](https://github.com/asiflow/hyper-claude-code/actions/workflows/tests.yml)
-[![Type checking: Ty](https://img.shields.io/badge/type%20checking-ty-ffcc00.svg?style=for-the-badge)](https://pypi.org/project/ty/)
-[![Code style: Ruff](https://img.shields.io/badge/code%20formatting-ruff-f5a623.svg?style=for-the-badge)](https://github.com/astral-sh/ruff)
+<br>
 
-[Quick Start](#-quick-start) · [Middleware](#-intelligent-middleware) · [Providers](#-providers) · [Agent Team](#-31-agent-development-team) · [API](#-api-endpoints) · [Docs](#-development)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.14-3776ab.svg?style=flat-square&logo=python&logoColor=white)](https://www.python.org/downloads/)
+[![Tests](https://img.shields.io/badge/tests-20K%2B_lines-00c0ff.svg?style=flat-square)](tests/)
+[![Agents](https://img.shields.io/badge/agents-31-ff6b6b.svg?style=flat-square)](.claude/agents/)
+[![Contracts](https://img.shields.io/badge/contracts-341_assertions-4ecdc4.svg?style=flat-square)](.claude/tests/agents/)
 
 </div>
 
 ---
 
-## Why Hyper Claude Code?
-
-Claude Code is the best agentic coding tool. But it only works with Anthropic's models at Anthropic's prices.
-
-**Hyper Claude Code changes that.** It sits between Claude Code and any LLM provider — transparently proxying requests while adding intelligence at every layer.
+## At a Glance
 
 | | |
-|---|---|
+|:--|:--|
 | **6 Providers** | NVIDIA NIM, OpenRouter, DeepSeek, LM Studio, llama.cpp, Ollama |
 | **4 Middleware Plugins** | Cost tracking, response caching, provider failover, request logging |
-| **31-Agent Dev Team** | CTO-led engineering team with NEXUS protocol, Shadow Mind, trust infrastructure |
-| **7 API Endpoints** | Cost, cache, health monitoring + standard Anthropic Messages API |
-| **75K+ Lines** | Production-grade Python 3.14 with 20K+ lines of tests |
-| **13 Feature Flags** | Everything toggleable, zero overhead when off |
+| **31-Agent Dev Team** | CTO-led with NEXUS protocol, Shadow Mind, trust ledger, adversarial review |
+| **7 API Endpoints** | Cost, cache, health monitoring alongside standard Anthropic Messages API |
+| **75K+ Lines of Code** | Production-grade Python 3.14 with 20K+ lines of tests |
+| **13 Feature Flags** | Every capability toggleable, zero overhead when off |
+| **3 Architecture Diagrams** | [Hero](.claude/docs/diagrams/diagram-1-hero.png), [Dispatch Lifecycle](.claude/docs/diagrams/diagram-2-dispatch-lifecycle.png), [Shadow Mind](.claude/docs/diagrams/diagram-3-shadow-mind.png) |
+
+---
+
+## What Is This?
+
+Claude Code is the best agentic coding tool — but it only works with Anthropic's models at Anthropic's prices.
+
+**Hyper Claude Code sits between Claude Code and any LLM provider.** It transparently proxies every request while adding intelligence at each layer: cost tracking, response caching, provider failover, and request logging — all as middleware plugins on an extensible pipeline.
+
+On top of that, it ships with a **31-agent AI engineering team** — not a framework, but an operating system layer built on Claude Code. The team has a CTO, domain experts, adversarial reviewers, a trust calibration ledger, a parallel cognitive system (Shadow Mind), and a hiring pipeline that grows the roster when coverage gaps appear.
 
 ```
 Claude Code CLI / VS Code / JetBrains
             |
-            |  Standard Anthropic API
+            |  Standard Anthropic Messages API
             v
-    +-----------------------+
-    |  Hyper Claude Code    |
-    |                       |
-    |  Cost Tracking        |
-    |  Response Caching     |
-    |  Provider Failover    |
-    |  Request Logging      |
-    +-----------------------+
+   +---------------------------+
+   |    Hyper Claude Code       |
+   |                           |
+   |  [Failover]  ->  [Cache]  |
+   |      ->  [Logger]         |
+   |      ->  [Cost Tracker]   |
+   +---------------------------+
             |
             |  Provider-native format
             v
-    NIM  OpenRouter  DeepSeek  LM Studio  llama.cpp  Ollama
+  NIM  OpenRouter  DeepSeek  LM Studio  llama.cpp  Ollama
 ```
 
-**Use any model.** Free, paid, or local. NVIDIA NIM, OpenRouter, DeepSeek, LM Studio, llama.cpp, Ollama — all work out of the box.
+**Use any model.** Free, paid, or local — all work out of the box.
 
-**Pay nothing.** Route to free models on NVIDIA NIM or OpenRouter. Run fully local with Ollama or llama.cpp. Zero API costs.
+**Pay nothing.** Route to free models on NVIDIA NIM or OpenRouter. Run local with Ollama or llama.cpp.
 
-**Stay private.** Run local models — your code never leaves your machine.
+**Stay private.** Local models mean your code never leaves your machine.
 
-**Mix models per tier.** Send Opus requests to a powerful cloud model, Sonnet to a mid-tier, Haiku to a fast local model. All automatic.
+**Mix models per tier.** Opus to a powerful cloud model, Sonnet to mid-tier, Haiku to a fast local model.
 
 ---
 
 ## Quick Start
 
-### 1. Install
+### 1. Prerequisites
+
+Install [Claude Code](https://github.com/anthropics/claude-code), [uv](https://github.com/astral-sh/uv), and Python 3.14:
 
 ```bash
-# Install Claude Code (https://github.com/anthropics/claude-code)
-# Then:
-curl -LsSf https://astral.sh/uv/install.sh | sh
+brew install uv          # or: pip install uv
 uv python install 3.14
 ```
 
 <details>
-<summary>Windows PowerShell</summary>
+<summary>Windows</summary>
 
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-uv self update
 uv python install 3.14
 ```
 </details>
 
-### 2. Configure
+### 2. Clone and Configure
 
 ```bash
 git clone https://github.com/asiflow/hyper-claude-code.git
@@ -92,7 +97,7 @@ cd hyper-claude-code
 cp .env.example .env
 ```
 
-Edit `.env` — pick a provider and set your key:
+Edit `.env` — pick a provider:
 
 ```dotenv
 NVIDIA_NIM_API_KEY="nvapi-your-key"
@@ -105,10 +110,10 @@ ANTHROPIC_AUTH_TOKEN="your-secret-token"
 ### 3. Start
 
 ```bash
-uv run uvicorn server:app --host 0.0.0.0 --port 8082
+uv run uvicorn server:app --port 8082
 ```
 
-> **Security:** When binding to `0.0.0.0`, always set `ANTHROPIC_AUTH_TOKEN`. For local-only use, omit `--host` to default to `127.0.0.1`.
+> **Security:** Add `--host 0.0.0.0` only if you need network access, and always set `ANTHROPIC_AUTH_TOKEN` when doing so. Default binds to `127.0.0.1` (local only).
 
 ### 4. Connect Claude Code
 
@@ -116,47 +121,30 @@ uv run uvicorn server:app --host 0.0.0.0 --port 8082
 ANTHROPIC_AUTH_TOKEN="your-secret-token" ANTHROPIC_BASE_URL="http://localhost:8082" claude
 ```
 
-That's it. Claude Code now runs through your proxy with your chosen model.
-
 <details>
-<summary>VS Code Extension</summary>
+<summary>VS Code / JetBrains / Model Picker setup</summary>
 
-Add to `settings.json`:
-
+**VS Code** — add to `settings.json`:
 ```json
 "claudeCode.environmentVariables": [
   { "name": "ANTHROPIC_BASE_URL", "value": "http://localhost:8082" },
   { "name": "ANTHROPIC_AUTH_TOKEN", "value": "your-secret-token" }
 ]
 ```
-</details>
 
-<details>
-<summary>JetBrains ACP</summary>
-
-Edit the installed Claude ACP config and add:
-
+**JetBrains ACP** — edit Claude ACP config, add:
 ```json
 "env": {
   "ANTHROPIC_BASE_URL": "http://localhost:8082",
   "ANTHROPIC_AUTH_TOKEN": "your-secret-token"
 }
 ```
-</details>
 
-<details>
-<summary>Model Picker (claude-pick)</summary>
-
+**Model Picker** — interactive model selection at launch:
 ```bash
 brew install fzf
 alias claude-pick="/path/to/hyper-claude-code/claude-pick"
 claude-pick
-```
-
-Or create fixed aliases:
-
-```bash
-alias claude-kimi='ANTHROPIC_BASE_URL="http://localhost:8082" ANTHROPIC_AUTH_TOKEN="token:moonshotai/kimi-k2.5" claude'
 ```
 </details>
 
@@ -164,264 +152,238 @@ alias claude-kimi='ANTHROPIC_BASE_URL="http://localhost:8082" ANTHROPIC_AUTH_TOK
 
 ## Intelligent Middleware
 
-HCC is not just a proxy — it's an **intelligent middleware platform**. Four built-in plugins intercept every request, all behind feature flags with zero overhead when disabled.
+HCC is not just a proxy — it's an **extensible middleware platform**. Four plugins intercept every request, all behind feature flags with zero overhead when disabled.
 
-### Cost Intelligence
+| Plugin | What It Does | Key Config |
+|--------|-------------|-----------|
+| **Cost Intelligence** | Per-request cost tracking, session/daily/monthly aggregation, hard budget caps (HTTP 429) | `ENABLE_COST_TRACKING=true` `MAX_SESSION_COST_USD=5.00` |
+| **Response Caching** | SHA-256 exact-match caching with configurable TTL, LRU eviction, hit-rate stats | `ENABLE_RESPONSE_CACHE=true` `CACHE_TTL_SECONDS=3600` |
+| **Provider Failover** | Per-provider circuit breaker (CLOSED/OPEN/HALF_OPEN), configurable failover chains | `ENABLE_PROVIDER_FAILOVER=true` `FAILOVER_ERROR_THRESHOLD=0.5` |
+| **Request Logging** | Full audit trail to local SQLite — model, tokens, latency, cost per request | `ENABLE_REQUEST_LOGGING=true` |
 
-Track what every coding session costs. Set budget caps. Never overspend.
-
-```dotenv
-ENABLE_COST_TRACKING=true
-MAX_SESSION_COST_USD=5.00
-```
-
-- Real-time per-request cost computation from token counts + provider pricing
-- Session, daily, and monthly aggregation via `GET /v1/cost`
-- Hard budget cap — returns HTTP 429 before you exceed your limit
-- Per-provider pricing tables (free models report $0.00)
-
-### Response Caching
-
-Identical requests return instantly. Save money and latency.
-
-```dotenv
-ENABLE_RESPONSE_CACHE=true
-CACHE_TTL_SECONDS=3600
-CACHE_MAX_ENTRIES=1000
-```
-
-- SHA-256 exact-match on normalized request content
-- Configurable TTL and max entry count with LRU eviction
-- Cache stats at `GET /v1/cache/stats` — measure your actual hit rate
-- Clear cache anytime via `POST /v1/cache/clear`
-
-### Provider Failover
-
-If one provider goes down, HCC switches automatically. Your coding session never breaks.
-
-```dotenv
-ENABLE_PROVIDER_FAILOVER=true
-FAILOVER_ERROR_THRESHOLD=0.5
-FAILOVER_COOLDOWN_SECONDS=30
-```
-
-- Per-provider circuit breaker (CLOSED / OPEN / HALF_OPEN state machine)
-- Configurable error thresholds and sliding window
-- Ordered failover chains — define backup providers per primary
-- Health dashboard at `GET /v1/health/providers`
-
-### Request Logging
-
-Full audit trail of every request for debugging and analysis.
-
-```dotenv
-ENABLE_REQUEST_LOGGING=true
-STORAGE_DB_PATH="~/.fcc/hcc.db"
-```
-
-- Model, provider, token counts, latency, cost — all logged to local SQLite
-- Zero external dependencies — everything stays on your machine
-
-### Middleware Pipeline Architecture
-
-Every feature is a plugin in an extensible pipeline:
+### Pipeline Architecture
 
 ```
-Request --> [Failover] --> [Cache] --> [Logger] --> [Cost] --> Provider
-               |              |
-         reroute if       return cached
-         provider down    (skip everything)
+Request -> [Failover] -> [Cache] -> [Logger] -> [Cost] -> Provider
+               |             |
+         reroute if      return cached
+         provider down   (skip everything)
 ```
 
-Build your own middleware by extending the `Middleware` base class. Add it to the pipeline. Done.
+Each plugin is a class extending `middleware.Middleware` with `before_request()` and `after_response()` hooks. Build your own — add it to the pipeline in `api/runtime.py`.
 
 ---
 
 ## Providers
 
-Six backends. Two transport types. One API.
+Six backends. Two transport types. One unified API.
 
-| Provider | Prefix | Key Required | Models |
-|----------|--------|:---:|--------|
-| **NVIDIA NIM** | `nvidia_nim/...` | Yes | [browse](https://build.nvidia.com/explore/discover) — `glm4.7`, `glm5`, `kimi-k2.5`, `minimax-m2.5` |
-| **OpenRouter** | `open_router/...` | Yes | [browse](https://openrouter.ai/models) — 200+ models, [free tier](https://openrouter.ai/collections/free-models) |
-| **DeepSeek** | `deepseek/...` | Yes | `deepseek-chat`, `deepseek-reasoner` |
-| **LM Studio** | `lmstudio/...` | No | Any loaded model |
-| **llama.cpp** | `llamacpp/...` | No | Any served model |
-| **Ollama** | `ollama/...` | No | Any pulled model |
+| Provider | Prefix | Key | Transport |
+|----------|--------|:---:|-----------|
+| **NVIDIA NIM** | `nvidia_nim/...` | Required | OpenAI chat -> Anthropic SSE translation |
+| **OpenRouter** | `open_router/...` | Required | Native Anthropic Messages |
+| **DeepSeek** | `deepseek/...` | Required | Native Anthropic Messages |
+| **LM Studio** | `lmstudio/...` | None | Native Anthropic Messages |
+| **llama.cpp** | `llamacpp/...` | None | Native Anthropic Messages |
+| **Ollama** | `ollama/...` | None | Native Anthropic Messages |
 
 <details>
 <summary><b>Provider setup details</b></summary>
 
-**NVIDIA NIM** — Get a key at [build.nvidia.com/settings/api-keys](https://build.nvidia.com/settings/api-keys):
-```dotenv
-NVIDIA_NIM_API_KEY="nvapi-your-key"
-MODEL="nvidia_nim/z-ai/glm4.7"
-```
+**NVIDIA NIM** — [Get key](https://build.nvidia.com/settings/api-keys): `MODEL="nvidia_nim/z-ai/glm4.7"`
 
-**OpenRouter** — Get a key at [openrouter.ai/keys](https://openrouter.ai/keys):
-```dotenv
-OPENROUTER_API_KEY="sk-or-your-key"
-MODEL="open_router/stepfun/step-3.5-flash:free"
-```
+**OpenRouter** — [Get key](https://openrouter.ai/keys): `MODEL="open_router/stepfun/step-3.5-flash:free"` ([free models](https://openrouter.ai/collections/free-models))
 
-**DeepSeek** — Get a key at [platform.deepseek.com](https://platform.deepseek.com/api_keys):
-```dotenv
-DEEPSEEK_API_KEY="your-deepseek-key"
-MODEL="deepseek/deepseek-chat"
-```
+**DeepSeek** — [Get key](https://platform.deepseek.com/api_keys): `MODEL="deepseek/deepseek-chat"`
 
-**LM Studio** — Start the local server, load a model:
-```dotenv
-LM_STUDIO_BASE_URL="http://localhost:1234/v1"
-MODEL="lmstudio/your-loaded-model"
-```
+**LM Studio** — Start server, load model: `MODEL="lmstudio/your-model"`
 
-**llama.cpp** — Start `llama-server` with enough context:
-```dotenv
-LLAMACPP_BASE_URL="http://localhost:8080/v1"
-MODEL="llamacpp/local-model"
-```
+**llama.cpp** — Start `llama-server`: `MODEL="llamacpp/local-model"`
 
-**Ollama** — Pull and serve:
-```bash
-ollama pull llama3.1 && ollama serve
-```
-```dotenv
-OLLAMA_BASE_URL="http://localhost:11434"
-MODEL="ollama/llama3.1"
-```
+**Ollama** — `ollama pull llama3.1 && ollama serve`: `MODEL="ollama/llama3.1"`
 </details>
 
 ### Mix Providers Per Tier
 
-Route different Claude Code model tiers to different providers:
-
 ```dotenv
-MODEL_OPUS="nvidia_nim/moonshotai/kimi-k2.5"
-MODEL_SONNET="open_router/deepseek/deepseek-r1-0528:free"
-MODEL_HAIKU="lmstudio/unsloth/GLM-4.7-Flash-GGUF"
-MODEL="nvidia_nim/z-ai/glm4.7"
+MODEL_OPUS="nvidia_nim/moonshotai/kimi-k2.5"          # Best model for complex tasks
+MODEL_SONNET="open_router/deepseek/deepseek-r1-0528:free"  # Mid-tier, free
+MODEL_HAIKU="ollama/llama3.1"                           # Fast local model
+MODEL="nvidia_nim/z-ai/glm4.7"                          # Default fallback
 ```
-
----
-
-## 31-Agent Development Team
-
-HCC ships with something no other open-source project has: **a 31-agent AI engineering team** that activates automatically when you open Claude Code in this repo.
-
-```
-Say "full team session" to activate all 31 agents.
-```
-
-The CTO agent takes command, assesses your request, delegates to specialist agents, validates findings through evidence verification, and synthesizes results with adversarial review.
-
-### The Roster
-
-| Tier | Agents | What They Do |
-|------|--------|-------------|
-| **CTO** | `cto` | Supreme authority — delegates, debates, evolves the team |
-| **Builders** | `elite-engineer` `ai-platform-architect` `frontend-platform-engineer` `beam-architect` `elixir-engineer` `go-hybrid-engineer` | Write production code across any stack |
-| **Guardians** | `go-expert` `python-expert` `typescript-expert` `deep-qa` `deep-reviewer` `infra-expert` `database-expert` `observability-expert` `test-engineer` `api-expert` `beam-sre` | Review, audit, catch what builders miss |
-| **Strategists** | `deep-planner` `orchestrator` | Decompose tasks, coordinate multi-agent workflows |
-| **Intelligence** | `memory-coordinator` `cluster-awareness` `benchmark-agent` `erlang-solutions-consultant` `talent-scout` `intuition-oracle` | Cross-agent knowledge, competitive intel, pattern recognition |
-| **Meta** | `meta-agent` `recruiter` | Evolve agent prompts, hire new specialists on demand |
-| **Governance** | `session-sentinel` | Protocol compliance, team health audits |
-| **Verification** | `evidence-validator` `challenger` | Verify claims against source, adversarial review of recommendations |
-
-### How It Works
-
-**NEXUS Protocol** — Agents can't spawn other agents directly (Claude Code limitation). NEXUS bridges this: agents emit `[NEXUS:SPAWN]`, `[NEXUS:SCALE]`, `[NEXUS:ASK]` syscalls via `SendMessage`. The main thread processes them in real-time. Result: full multi-agent orchestration within Claude Code's permission model.
-
-**Trust Infrastructure** — Every HIGH-severity finding is independently verified by `evidence-validator` before reaching you. Every strategic recommendation is stress-tested by `challenger` along 5 dimensions. A Bayesian trust ledger tracks per-agent accuracy across sessions.
-
-**Shadow Mind** — An optional parallel cognitive layer. Six components (Observer, Pattern Computer, Speculator, Dreamer, Pattern Library, Intuition Oracle) run alongside the conscious team, providing probabilistic pattern-based guidance via `[NEXUS:INTUIT]`. Delete `.claude/agent-memory/shadow-mind/` to disable. [Full spec](.claude/agent-memory/shadow-mind/README.md).
-
-**Contract Tests** — 341 assertions across 11 contracts validate every agent file. A pre-commit hook runs them automatically.
-
-```bash
-python3 .claude/tests/agents/run_contract_tests.py
-```
-
-### Team Documentation
-
-| | |
-|---|---|
-| [Team Overview](.claude/docs/team/TEAM_OVERVIEW.md) | Architecture and capabilities |
-| [Cheatsheet](.claude/docs/team/TEAM_CHEATSHEET.md) | Quick reference for dispatch patterns |
-| [Runbook](.claude/docs/team/TEAM_RUNBOOK.md) | Operational procedures |
-| [Scenarios](.claude/docs/team/TEAM_SCENARIOS.md) | Real-world walkthrough examples |
-| [Agent Template](.claude/docs/team/AGENT_TEMPLATE.md) | Create new specialist agents |
 
 ---
 
 ## Architecture
 
-### Request Lifecycle (10 Stages)
+### Request Lifecycle
 
-Every `/v1/messages` request flows through a precisely engineered pipeline:
+Every `/v1/messages` request flows through 10 precisely engineered stages:
 
 ```
- 1. INGRESS          FastAPI + ASGI (api/app.py, api/routes.py)
-        |
- 2. AUTH             Constant-time token comparison, 3 header formats
-        |                (api/dependencies.py)
- 3. VALIDATION       Pydantic models with extra="allow" for forward-compat
-        |                (api/models/anthropic.py)
- 4. MIDDLEWARE        Failover -> Cache -> Logger -> Cost Tracker
-        |                (middleware/*.py)
- 5. OPTIMIZATION     5 fast-path handlers intercept trivial requests locally
-        |                (api/optimization_handlers.py)
- 6. MODEL ROUTING    Claude model name -> provider_id/model_name resolution
-        |                (api/model_router.py, config/settings.py)
- 7. CONVERSION       Anthropic -> OpenAI chat (NIM) or native passthrough (5 others)
-        |                (core/anthropic/conversion.py, core/anthropic/native_messages_request.py)
- 8. UPSTREAM         Rate-limited, retried provider call with 3-tier protection
-        |                (providers/openai_compat.py, providers/anthropic_messages.py)
- 9. STREAMING        SSE event generation with thinking/tool/text block handling
-        |                (core/anthropic/sse.py, core/anthropic/thinking.py, core/anthropic/tools.py)
-10. DELIVERY         StreamingResponse with anti-buffering headers
-                         (api/services.py)
+ 1. INGRESS         FastAPI ASGI application           api/app.py
+ 2. AUTH             Constant-time token comparison      api/dependencies.py
+ 3. VALIDATION       Pydantic models (extra="allow")     api/models/anthropic.py
+ 4. MIDDLEWARE        Failover -> Cache -> Log -> Cost    middleware/*.py
+ 5. OPTIMIZATION     5 fast-path local handlers          api/optimization_handlers.py
+ 6. MODEL ROUTING    Claude name -> provider/model ref   api/model_router.py
+ 7. CONVERSION       Anthropic -> provider format        core/anthropic/conversion.py
+ 8. UPSTREAM         Rate-limited provider call           providers/*.py
+ 9. STREAMING        SSE with thinking/tool/text blocks  core/anthropic/sse.py
+10. DELIVERY         StreamingResponse to client          api/services.py
 ```
 
-### Dual Transport Architecture
+### Dual Transport
 
-HCC handles two fundamentally different provider protocols through a shared base:
-
-| Transport | Provider | How It Works |
-|-----------|----------|-------------|
-| **OpenAI Chat Translation** | NVIDIA NIM | Converts Anthropic messages to OpenAI chat format. `ThinkTagParser` extracts `<think>` blocks from text. `HeuristicToolParser` detects tool calls in plain text. Full SSE reconstruction. |
-| **Native Anthropic Messages** | OpenRouter, DeepSeek, LM Studio, llama.cpp, Ollama | Near-transparent passthrough. Sanitizes thinking history, filters hidden blocks, tracks emitted SSE state for error recovery. |
-
-Both transports share `BaseProvider` and produce identical Anthropic-compatible SSE output.
+| Transport | Used By | Complexity |
+|-----------|---------|-----------|
+| **OpenAI Chat Translation** | NVIDIA NIM | Converts Anthropic to OpenAI format. `ThinkTagParser` extracts `<think>` blocks. `HeuristicToolParser` detects tool calls in plain text. Full SSE reconstruction. |
+| **Native Anthropic** | OpenRouter, DeepSeek, LM Studio, llama.cpp, Ollama | Near-transparent passthrough with thinking history sanitization and SSE state tracking for error recovery. |
 
 ### Three-Tier Rate Limiting
 
-Every provider is protected by three independent rate limiting mechanisms:
-
 | Tier | Mechanism | Purpose |
 |------|-----------|---------|
-| **Proactive** | `StrictSlidingWindowLimiter` | Prevents exceeding known rate limits before they trigger |
-| **Reactive** | 429 response detection + exponential backoff | Reacts to actual provider rate limit responses |
-| **Concurrency** | `asyncio.Semaphore` | Caps simultaneous in-flight requests per provider |
+| Proactive | `StrictSlidingWindowLimiter` | Prevent hitting limits |
+| Reactive | 429 detection + exponential backoff | Respond to actual limits |
+| Concurrency | `asyncio.Semaphore` | Cap simultaneous requests |
 
-### Security Architecture
+### Security
 
 | Layer | Protection |
 |-------|-----------|
-| **Auth** | Constant-time comparison via `secrets.compare_digest` (CWE-208). CORS restricted to localhost. |
-| **SSRF** | Cloud metadata IP blocklist (AWS, Azure, GCP, Alibaba). DNS rebinding protection via pinned resolution. Private network blocking. |
-| **Input** | Pydantic validation on all request bodies. Scheme allowlisting on web tools. |
-| **Output** | Sensitive log redaction by default. 6 `LOG_RAW_*` flags all default OFF. |
-| **Process** | CLI sessions use `create_subprocess_exec` (no shell injection). Atexit cleanup handler. |
+| Auth | `secrets.compare_digest` (constant-time, CWE-208). CORS restricted to localhost. |
+| SSRF | Cloud metadata IP blocklist. DNS rebinding protection. Private network blocking. |
+| Input | Pydantic validation. Scheme allowlisting. |
+| Output | 6 `LOG_RAW_*` flags all default OFF. Sensitive data redacted. |
+| Process | `create_subprocess_exec` (no shell injection). Atexit cleanup. |
 
-### Key Engineering Decisions
+### Engineering Decisions
 
-- **Forward-compatible models** — `extra="allow"` on Pydantic models passes unknown Anthropic fields through untouched. New Claude API features work automatically.
-- **Streaming-first** — All responses stream. The proxy never buffers complete responses. `X-Accel-Buffering: no` prevents reverse proxy interference.
-- **Zero-overhead middleware** — Disabled plugins add exactly zero per-request cost. No conditional checks, no empty function calls.
-- **AST-enforced import boundaries** — Contract tests use Python AST analysis to verify dependency direction. `core/` never imports `api/`. `providers/` never imports `messaging/`. Violations fail CI.
-- **Mid-stream error recovery** — If a provider fails during streaming, the proxy closes open SSE blocks correctly before emitting the error, preventing Claude Code replay corruption.
+- **Forward-compatible models** — `extra="allow"` passes unknown Anthropic fields through. New API features work automatically.
+- **Streaming-first** — Never buffers complete responses. `X-Accel-Buffering: no` prevents reverse proxy interference.
+- **AST-enforced import boundaries** — Contract tests verify `core/` never imports `api/`. Violations fail CI.
+- **Mid-stream error recovery** — Closes open SSE blocks correctly before emitting errors, preventing Claude Code replay corruption.
+
+---
+
+## 31-Agent Development Team
+
+HCC ships with something no other open-source project has: a **31-agent AI engineering team** that activates when you open Claude Code in this repo.
+
+> Say **"full team session"** to activate all 31 agents.
+
+This is not a framework. It's an **operating system layer on top of Claude Code** — 31 domain-expert agents coordinated through a syscall protocol, governed by runtime hooks, validated by 341 contract test assertions, calibrated by a Bayesian trust ledger, and equipped with a hiring pipeline for growing the roster.
+
+<div align="center">
+<img src=".claude/docs/diagrams/diagram-1-hero.png" alt="Agent Team Architecture" width="700">
+</div>
+
+### The Layered Architecture
+
+```
+LAYER 4 — USER          Human operator, natural language goals
+LAYER 3 — SPECIALISTS   24 domain agents (builders, guardians, intelligence, meta)
+LAYER 2 — SYSTEM        CTO, orchestrator, planner, sentinel, validators
+LAYER 1.75 — SHADOW     Observer, Pattern Computer, Speculator, Dreamer, Oracle
+LAYER 1.5 — TRUST       Hooks, contract tests, trust ledger (hard invariants)
+LAYER 1 — KERNEL        Main thread, NEXUS syscall processing, signal persistence
+LAYER 0 — RUNTIME       Claude Code CLI, git worktrees, MCP servers
+```
+
+### Agent Roster
+
+| Tier | Agents | Role |
+|------|--------|------|
+| **CTO** | `cto` | Supreme authority — assesses, delegates, debates, self-evolves |
+| **Builders** | `elite-engineer` `ai-platform-architect` `frontend-platform-engineer` `beam-architect` `elixir-engineer` `go-hybrid-engineer` | Write production code across any stack |
+| **Guardians** | `go-expert` `python-expert` `typescript-expert` `deep-qa` `deep-reviewer` `infra-expert` `database-expert` `observability-expert` `test-engineer` `api-expert` `beam-sre` | Review, audit, catch what builders miss |
+| **Strategists** | `deep-planner` `orchestrator` | Task decomposition, workflow coordination |
+| **Intelligence** | `memory-coordinator` `cluster-awareness` `benchmark-agent` `erlang-solutions-consultant` `talent-scout` `intuition-oracle` | Cross-agent knowledge, competitive intel, pattern recognition |
+| **Meta** | `meta-agent` `recruiter` | Evolve agent prompts, hire new specialists on demand |
+| **Governance** | `session-sentinel` | Protocol compliance, team health audits |
+| **Verification** | `evidence-validator` `challenger` | Verify claims against source, adversarial review |
+
+### NEXUS Protocol
+
+Subagents in Claude Code can't spawn other agents or access privileged tools. **NEXUS bridges this gap** with a syscall interface:
+
+| Syscall | What It Does |
+|---------|-------------|
+| `[NEXUS:SPAWN]` | Spawn a new agent into the team |
+| `[NEXUS:SCALE]` | Spawn N copies of an agent for parallel work |
+| `[NEXUS:ASK]` | Proxy a question to the human operator |
+| `[NEXUS:MCP]` | Install/configure an MCP server |
+| `[NEXUS:INTUIT]` | Query the Shadow Mind for pattern-based guidance |
+| `[NEXUS:RELOAD]` | Shutdown and respawn an agent with fresh context |
+| `[NEXUS:CRON]` | Create a scheduled task |
+| `[NEXUS:WORKTREE]` | Create an isolated git worktree |
+
+Agents emit syscalls via `SendMessage`. The main thread (kernel) processes them in real-time and responds with `[NEXUS:OK]` or `[NEXUS:ERR]`.
+
+<div align="center">
+<img src=".claude/docs/diagrams/diagram-2-dispatch-lifecycle.png" alt="Dispatch Lifecycle" width="700">
+</div>
+
+### Trust Infrastructure
+
+Every finding is verified. Every recommendation is challenged.
+
+- **Evidence Validator** — HIGH-severity findings are independently verified against source code. Classified as CONFIRMED, PARTIALLY_CONFIRMED, REFUTED, or UNVERIFIABLE.
+- **Challenger** — Strategic recommendations undergo adversarial review along 5 dimensions: steelman alternatives, hidden assumptions, evidence quality, missed cases, downstream impact.
+- **Trust Ledger** — Bayesian-blended per-agent accuracy scorecard at `.claude/agent-memory/trust-ledger/`. The CTO uses trust weights to resolve conflicting findings between agents.
+
+### Shadow Mind
+
+An optional parallel cognitive layer that runs alongside the conscious team.
+
+<div align="center">
+<img src=".claude/docs/diagrams/diagram-3-shadow-mind.png" alt="Shadow Mind Architecture" width="700">
+</div>
+
+Six components provide probabilistic pattern-based guidance:
+
+| Component | Role |
+|-----------|------|
+| **Observer** | Tails the signal bus, writes structured observations |
+| **Pattern Computer** | Derives n-grams, co-occurrences, temporal patterns |
+| **Pattern Library** | Read-only data substrate for computed patterns |
+| **Speculator** | Generates counterfactual variants per observation |
+| **Dreamer** | Proposes insight candidates during idle windows |
+| **Intuition Oracle** | Queryable surface via `[NEXUS:INTUIT]` — synthesizes all sources |
+
+Delete `.claude/agent-memory/shadow-mind/` to disable without affecting the team. [Full spec](.claude/agent-memory/shadow-mind/README.md).
+
+### Dynamic Specialist Hiring
+
+The team detects its own coverage gaps and hires new specialists:
+
+1. **`talent-scout`** continuously monitors for domain gaps (5-signal confidence scoring)
+2. When confidence exceeds threshold + `session-sentinel` co-signs, **`recruiter`** executes an 8-phase pipeline:
+   - Domain research -> Prompt synthesis -> Contract validation -> Challenger review -> Atomic registration -> Post-hire verify -> Probation -> Promotion
+3. **`meta-agent`** performs atomic registration (agent file + contract tests + hooks + trust ledger + memory scaffold) in a single commit
+
+### Contract Tests
+
+341 assertions (11 contracts x 31 agents) validate every agent file:
+
+```bash
+python3 .claude/tests/agents/run_contract_tests.py
+```
+
+A pre-commit hook runs these automatically. No agent change ships without passing all contracts.
+
+### Team Documentation
+
+| Document | What It Covers |
+|----------|---------------|
+| [Team Overview](.claude/docs/team/TEAM_OVERVIEW.md) | Full architecture — layered OS, all 31 agents, NEXUS, Shadow Mind |
+| [Cheatsheet](.claude/docs/team/TEAM_CHEATSHEET.md) | Quick reference — agent-domain map, NEXUS syscalls, dispatch patterns |
+| [Runbook](.claude/docs/team/TEAM_RUNBOOK.md) | Operational procedures — session lifecycle, Pattern F, incident response |
+| [Scenarios](.claude/docs/team/TEAM_SCENARIOS.md) | Real-world walkthroughs — audit campaigns, remediation, strategic planning |
+| [Agent Template](.claude/docs/team/AGENT_TEMPLATE.md) | Create new specialist agents |
+| [Architecture Diagrams](.claude/ARCHITECTURE_DIAGRAMS.md) | Mermaid source + ASCII fallbacks + PNG export instructions |
+| [Shadow Mind Spec](.claude/agent-memory/shadow-mind/README.md) | Full Shadow Mind component documentation |
 
 ---
 
@@ -431,81 +393,76 @@ All endpoints respect `ANTHROPIC_AUTH_TOKEN` when configured.
 
 | Method | Path | Description |
 |--------|------|-------------|
-| `POST` | `/v1/messages` | Anthropic Messages API (proxied) |
-| `POST` | `/v1/messages/count_tokens` | Token counting (proxied) |
+| `POST` | `/v1/messages` | Anthropic Messages API (proxied to provider) |
+| `POST` | `/v1/messages/count_tokens` | Token counting |
 | `GET` | `/v1/models` | Available model list |
-| `GET` | `/v1/cost` | Cost summary — session / daily / monthly |
-| `GET` | `/v1/cache/stats` | Cache hit rate and entry count |
-| `POST` | `/v1/cache/clear` | Clear response cache |
+| `GET` | `/v1/cost` | Cost summary — session, daily, monthly + budget remaining |
+| `GET` | `/v1/cache/stats` | Cache hit/miss counts, hit rate, entry count |
+| `POST` | `/v1/cache/clear` | Clear all cached responses |
 | `GET` | `/v1/health/providers` | Circuit breaker status per provider |
 
 ---
 
 ## Discord & Telegram Bots
 
-Run Claude Code sessions remotely. Stream progress. Branch conversations via replies.
+Run Claude Code sessions remotely via chat. Stream progress. Branch conversations with replies.
 
-> **Security:** The bot runs Claude Code with `--dangerously-skip-permissions` within `ALLOWED_DIR`. Restrict the directory scope and always configure allowlists.
+> **Security:** Bots run Claude Code with `--dangerously-skip-permissions` within `ALLOWED_DIR`. Restrict directory scope and always configure channel/user allowlists.
 
 <details>
-<summary><b>Discord setup</b></summary>
+<summary><b>Discord</b></summary>
 
 ```dotenv
 MESSAGING_PLATFORM="discord"
-DISCORD_BOT_TOKEN="your-discord-bot-token"
+DISCORD_BOT_TOKEN="your-token"
 ALLOWED_DISCORD_CHANNELS="123456789"
 CLAUDE_WORKSPACE="./agent_workspace"
-ALLOWED_DIR="/path/to/your/projects"
+ALLOWED_DIR="/path/to/projects"
 ```
 
-Create the bot in the [Discord Developer Portal](https://discord.com/developers/applications). Enable Message Content Intent. Invite with read/send/history permissions.
+Create bot in [Discord Developer Portal](https://discord.com/developers/applications). Enable Message Content Intent.
 </details>
 
 <details>
-<summary><b>Telegram setup</b></summary>
+<summary><b>Telegram</b></summary>
 
 ```dotenv
 MESSAGING_PLATFORM="telegram"
 TELEGRAM_BOT_TOKEN="123456789:ABC..."
 ALLOWED_TELEGRAM_USER_ID="your-user-id"
 CLAUDE_WORKSPACE="./agent_workspace"
-ALLOWED_DIR="/path/to/your/projects"
+ALLOWED_DIR="/path/to/projects"
 ```
 
-Get a token from [@BotFather](https://t.me/BotFather). Get your user ID from [@userinfobot](https://t.me/userinfobot).
+Token from [@BotFather](https://t.me/BotFather). User ID from [@userinfobot](https://t.me/userinfobot).
 </details>
 
-Bot commands: `/stop` (cancel task), `/clear` (reset sessions), `/stats` (session state).
+Commands: `/stop` (cancel), `/clear` (reset), `/stats` (status).
 
 ### Voice Notes
 
-Transcribe voice messages on Discord and Telegram via local Whisper or NVIDIA NIM:
+Transcribe voice messages via local Whisper or NVIDIA NIM:
 
 ```bash
 uv sync --extra voice_local   # Local Whisper
 uv sync --extra voice          # NVIDIA NIM
 ```
 
-```dotenv
-VOICE_NOTE_ENABLED=true
-WHISPER_DEVICE="cpu"    # cpu | cuda | nvidia_nim
-```
-
 ---
 
 ## Configuration
 
-[`.env.example`](.env.example) is the canonical reference. Key groups:
+[`.env.example`](.env.example) is the canonical reference.
 
 <details>
 <summary><b>Model Routing</b></summary>
 
 ```dotenv
-MODEL="nvidia_nim/z-ai/glm4.7"     # Default model
-MODEL_OPUS=                          # Override for Opus-tier requests
-MODEL_SONNET=                        # Override for Sonnet-tier requests
-MODEL_HAIKU=                         # Override for Haiku-tier requests
-ENABLE_MODEL_THINKING=true           # Enable thinking/reasoning blocks
+MODEL="nvidia_nim/z-ai/glm4.7"
+MODEL_OPUS=
+MODEL_SONNET=
+MODEL_HAIKU=
+ENABLE_MODEL_THINKING=true
 ```
 </details>
 
@@ -513,17 +470,17 @@ ENABLE_MODEL_THINKING=true           # Enable thinking/reasoning blocks
 <summary><b>Middleware Feature Flags</b></summary>
 
 ```dotenv
-ENABLE_MIDDLEWARE_PIPELINE=true      # Master switch
-ENABLE_COST_TRACKING=false           # Cost intelligence
-MAX_SESSION_COST_USD=                # Budget cap (empty = no limit)
-ENABLE_RESPONSE_CACHE=false          # Response caching
-CACHE_TTL_SECONDS=3600               # Cache lifetime
-CACHE_MAX_ENTRIES=1000               # Max cached responses
-ENABLE_PROVIDER_FAILOVER=false       # Circuit breaker + failover
-FAILOVER_ERROR_THRESHOLD=0.5         # Error rate to trip breaker
-FAILOVER_COOLDOWN_SECONDS=30         # Cooldown before retry
-ENABLE_REQUEST_LOGGING=false         # SQLite request logging
-STORAGE_DB_PATH="~/.fcc/hcc.db"     # Database path
+ENABLE_MIDDLEWARE_PIPELINE=true       # Master switch
+ENABLE_COST_TRACKING=false            # Cost intelligence
+MAX_SESSION_COST_USD=                 # Budget cap (empty = no limit)
+ENABLE_RESPONSE_CACHE=false           # Response caching
+CACHE_TTL_SECONDS=3600                # Cache lifetime
+CACHE_MAX_ENTRIES=1000                # Max cached responses
+ENABLE_PROVIDER_FAILOVER=false        # Circuit breaker + failover
+FAILOVER_ERROR_THRESHOLD=0.5          # Error rate to trip breaker
+FAILOVER_COOLDOWN_SECONDS=30          # Recovery window
+ENABLE_REQUEST_LOGGING=false          # SQLite audit trail
+STORAGE_DB_PATH="~/.fcc/hcc.db"      # Database path
 ```
 </details>
 
@@ -543,32 +500,34 @@ HTTP_CONNECT_TIMEOUT=10
 <summary><b>Security & Diagnostics</b></summary>
 
 ```dotenv
-ANTHROPIC_AUTH_TOKEN=                # API key for proxy access
-LOG_RAW_API_PAYLOADS=false           # Exposes prompts — keep off
+ANTHROPIC_AUTH_TOKEN=
+LOG_RAW_API_PAYLOADS=false
 LOG_RAW_SSE_EVENTS=false
 LOG_API_ERROR_TRACEBACKS=false
 LOG_RAW_MESSAGING_CONTENT=false
 LOG_RAW_CLI_DIAGNOSTICS=false
 ```
+
+All raw logging flags default OFF. Enabling them exposes prompts, tool arguments, and model output.
 </details>
 
 ---
 
 ## Development
 
-```text
+```
 hyper-claude-code/
   server.py              ASGI entry point
-  api/                   FastAPI routes, services, routing, optimizations
-  core/                  Anthropic protocol helpers, SSE, streaming
+  api/                   FastAPI routes, services, model routing, optimizations
+  core/                  Anthropic protocol — SSE, conversion, streaming, tools
   providers/             6 provider transports, registry, rate limiting
-  middleware/             Cost, cache, failover, logging plugins
-  storage/               SQLite persistence
+  middleware/             Cost, cache, failover, logging plugins + pipeline
+  storage/               SQLite persistence layer
   messaging/             Discord/Telegram bots, voice, sessions
-  cli/                   Entrypoints, Claude process management
+  cli/                   Entrypoints, Claude subprocess management
   config/                Settings, provider catalog, logging
-  tests/                 Unit, contract, and smoke tests
-  .claude/               31-agent team, hooks, docs, Shadow Mind
+  tests/                 Unit, contract, and smoke tests (20K+ lines)
+  .claude/               31-agent team, hooks, docs, Shadow Mind, trust ledger
 ```
 
 ```bash
@@ -580,17 +539,19 @@ uv run pytest            # Test
 
 ### Extending
 
-- **New provider:** Extend `OpenAIChatTransport` or `AnthropicMessagesTransport`, register in `config/provider_catalog.py` and `providers/registry.py`
-- **New middleware:** Extend `middleware.Middleware`, add to pipeline in `api/runtime.py`
-- **New bot platform:** Implement `MessagingPlatform` in `messaging/platforms/`
-- **New agent:** Use the [agent template](.claude/docs/team/AGENT_TEMPLATE.md)
+| What | How |
+|------|-----|
+| New provider | Extend `OpenAIChatTransport` or `AnthropicMessagesTransport`, register in `provider_catalog.py` + `registry.py` |
+| New middleware | Extend `middleware.Middleware`, add to pipeline in `api/runtime.py` |
+| New bot platform | Implement `MessagingPlatform` in `messaging/platforms/` |
+| New agent | Use the [Agent Template](.claude/docs/team/AGENT_TEMPLATE.md) |
 
 ---
 
 ## Troubleshooting
 
 <details>
-<summary><b>Claude Code says "undefined input_tokens" or malformed response</b></summary>
+<summary>Claude Code says "undefined input_tokens" or malformed response</summary>
 
 - Set `ANTHROPIC_BASE_URL` to `http://localhost:8082` (not `/v1`)
 - Check `server.log` for upstream errors
@@ -598,37 +559,39 @@ uv run pytest            # Test
 </details>
 
 <details>
-<summary><b>llama.cpp or LM Studio returns HTTP 400</b></summary>
+<summary>llama.cpp or LM Studio returns HTTP 400</summary>
 
-- Ensure the server supports `POST /v1/messages`
-- Increase `--ctx-size` for Claude Code's large prompts
-- Verify the base URL includes `/v1`
+- Verify `POST /v1/messages` is supported
+- Increase `--ctx-size` for Claude Code prompts
+- Check base URL includes `/v1`
 </details>
 
 <details>
-<summary><b>Provider disconnects during streaming</b></summary>
+<summary>Provider disconnects during streaming</summary>
 
-Reduce `PROVIDER_MAX_CONCURRENCY`, increase `HTTP_READ_TIMEOUT`, or enable failover to auto-switch providers.
+Reduce `PROVIDER_MAX_CONCURRENCY`, increase `HTTP_READ_TIMEOUT`, or enable failover.
 </details>
 
 <details>
-<summary><b>Tool calls work on one model but not another</b></summary>
+<summary>Tool calls work on one model but not another</summary>
 
-Tool support is model-dependent. Some models emit malformed tool JSON. Try another model or provider.
+Tool support is model-dependent. Some models emit malformed tool JSON. Try another model.
 </details>
 
 ---
 
 ## Contributing
 
-- Report bugs and feature requests in [Issues](https://github.com/asiflow/hyper-claude-code/issues)
-- Keep changes small and covered by focused tests
-- Run the full check sequence before opening a PR
-- `except X, Y` syntax is valid Python 3.14 (PEP 758) — do not "fix" it
+- [Issues](https://github.com/asiflow/hyper-claude-code/issues) for bugs and feature requests
+- Keep changes small and covered by tests
+- Run the full check sequence before PRs
+- `except X, Y` is valid Python 3.14 syntax (PEP 758) — do not "fix" it
+
+---
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+[MIT License](LICENSE) — Copyright (c) 2025-2026 [ASIFLOW.ai](https://asiflow.ai)
 
 ---
 
