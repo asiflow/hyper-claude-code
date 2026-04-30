@@ -1,0 +1,26 @@
+# Per-user local overrides — never commit
+settings.local.json
+
+# Trust ledger runtime data (rebuilds per-project)
+agent-memory/trust-ledger/*.json
+agent-memory/trust-ledger/parse-failures.log
+
+# Project-specific memory (every install accumulates its own)
+agent-memory/*/MEMORY.md.bak
+agent-memory/*/*.md.bak
+
+# Signal bus live entries (drained via Pattern F)
+# Note: keep the files themselves — just don't commit accumulated entries
+# Uncomment if you want a strictly empty-start repo:
+# agent-memory/signal-bus/memory-handoffs.md
+# agent-memory/signal-bus/evolution-signals.md
+# agent-memory/signal-bus/cross-agent-flags.md
+# agent-memory/signal-bus/nexus-log.md
+# agent-memory/signal-bus/dispatch-queue.md
+
+# macOS
+.DS_Store
+
+# Python bytecode
+__pycache__/
+*.pyc

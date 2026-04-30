@@ -1,0 +1,19 @@
+__pycache__
+*.pyc
+node_modules/
+
+# .claude/ ships with the repo in full — no exclusions
+.claude/**/__pycache__/
+.claude/**/*.pyc
+.cursor
+.pytest_cache
+.ruff_cache
+.serena
+.venv
+agent_workspace
+.env
+server.log
+debug-*.log
+.coverage
+llama_cache
+.smoke-results

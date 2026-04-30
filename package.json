@@ -1,0 +1,20 @@
+{
+  "name": "asiflow",
+  "version": "1.0.0",
+  "description": "ASIFLOW.AI - Enterprise AGI Platform",
+  "type": "commonjs",
+  "scripts": {
+    "lint:md": "markdownlint docs/ todo.md progress-tracking.md ga.md --fix",
+    "lint:md-check": "markdownlint docs/ todo.md progress-tracking.md ga.md"
+  },
+  "devDependencies": {
+    "markdownlint-cli": "^0.37.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-code": "^2.1.114",
+    "@anthropic-ai/claude-code-darwin-x64": "^2.1.114"
+  }
+}
